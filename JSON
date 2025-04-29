@@ -1,0 +1,637 @@
+[
+    {
+        "id": "bbf8f55f0c3f9fe4",
+        "type": "tab",
+        "label": "Fingerprint",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "81890e838b0657de",
+        "type": "mqtt out",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/poweronoff",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0d7221151110de61",
+        "x": 700,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e0d0a50c6ee431b0",
+        "type": "firebase auth",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "RTDB Auth",
+        "firebaseconfig": "",
+        "x": 220,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "63f0fa64b687e489",
+        "type": "mqtt in",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/id_get_request",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "0d7221151110de61",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 580,
+        "wires": [
+            [
+                "a8f67c9e4d257ec5"
+            ]
+        ]
+    },
+    {
+        "id": "616dd24829c97e0c",
+        "type": "ui_button",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "group": "0d18f6dc995db142",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Identify Fingerprint",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "se",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "81890e838b0657de"
+            ]
+        ]
+    },
+    {
+        "id": "a8f67c9e4d257ec5",
+        "type": "firebase.once",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "/id",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 500,
+        "y": 580,
+        "wires": [
+            [
+                "681c4405f02a5203"
+            ]
+        ]
+    },
+    {
+        "id": "681c4405f02a5203",
+        "type": "debug",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "40559ec95755edca",
+        "type": "remote-access",
+        "z": "bbf8f55f0c3f9fe4",
+        "confignode": "e124daca6d21176c",
+        "name": "",
+        "verbose": 0,
+        "x": 400,
+        "y": 20,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6d01ce761ea5c6fa",
+        "type": "ui_button",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "group": "0d18f6dc995db142",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Power On",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "on",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "81890e838b0657de"
+            ]
+        ]
+    },
+    {
+        "id": "26ce68fec0195295",
+        "type": "ui_button",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "group": "0d18f6dc995db142",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Power Off",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "off",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "81890e838b0657de"
+            ]
+        ]
+    },
+    {
+        "id": "d102935d50ecd617",
+        "type": "ui_text",
+        "z": "bbf8f55f0c3f9fe4",
+        "group": "0d18f6dc995db142",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Power",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": 16,
+        "color": "#ff0000",
+        "x": 610,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "94ada38ed1e91b06",
+        "type": "firebase.on",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "fingerprint/Power",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 250,
+        "y": 640,
+        "wires": [
+            [
+                "d102935d50ecd617"
+            ]
+        ]
+    },
+    {
+        "id": "7a0b72c03b301295",
+        "type": "ui_text_input",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "label": "Enter Your Name",
+        "tooltip": "",
+        "group": "0d18f6dc995db142",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "username",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "efc527657d3aecaf"
+            ]
+        ]
+    },
+    {
+        "id": "2a2d66c0d1ef0868",
+        "type": "ui_button",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "group": "0d18f6dc995db142",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Register New Fingerprint",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "register",
+        "topicType": "str",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "efc527657d3aecaf"
+            ]
+        ]
+    },
+    {
+        "id": "efc527657d3aecaf",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "Handle Fingerprint Username",
+        "func": "if (msg.topic === \"username\") {\n    context.set(\"username\", msg.payload);\n    return null;\n}\n\nif (msg.topic === \"register\") {\n    var name = context.get(\"username\") || \"\";\n    if (name === \"\") {\n        node.warn(\"⚠️ No username entered\");\n        return null;\n    }\n    msg.payload = name;\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "7902efc8143122b2",
+                "663eb706ded61f91"
+            ]
+        ]
+    },
+    {
+        "id": "7902efc8143122b2",
+        "type": "mqtt out",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/username",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3b7a3b308d9c95a6",
+        "x": 720,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "663eb706ded61f91",
+        "type": "debug",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "Debug Username",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ee15786eed4dcd6a",
+        "type": "ui_table",
+        "z": "bbf8f55f0c3f9fe4",
+        "group": "bb093c15ab4d4c80",
+        "name": "Table",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 830,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "edab045bf0f03a48",
+        "type": "firebase.on",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "/fingerprint/Users",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 250,
+        "y": 460,
+        "wires": [
+            [
+                "1c3a1ed73c35e1fa"
+            ]
+        ]
+    },
+    {
+        "id": "1c3a1ed73c35e1fa",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 1",
+        "func": "let users = msg.payload;\nlet tableData = [];\n\nfor (let key in users) {\n    if (users.hasOwnProperty(key)) {\n        tableData.push({\n            FingerprintId: users[key].id,\n            Name: users[key].name\n        });\n    }\n}\n\nmsg.payload = tableData;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 460,
+        "wires": [
+            [
+                "ee15786eed4dcd6a",
+                "79ff024907175a8c"
+            ]
+        ]
+    },
+    {
+        "id": "79ff024907175a8c",
+        "type": "debug",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "769c36b70f8a0458",
+        "type": "mqtt in",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/match",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "0d7221151110de61",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 740,
+        "wires": [
+            [
+                "acfae1a9a26a6b8d"
+            ]
+        ]
+    },
+    {
+        "id": "acfae1a9a26a6b8d",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 2",
+        "func": "let id = msg.payload.id;\nmsg.childpath = \"/fingerprint/Users/user\" + id;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 760,
+        "wires": [
+            [
+                "4b286d58b16875a8",
+                "0d3313616e1f624e"
+            ]
+        ]
+    },
+    {
+        "id": "4b286d58b16875a8",
+        "type": "firebase.once",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 720,
+        "y": 720,
+        "wires": [
+            [
+                "966f3d6088728841",
+                "ed6de966778b5e39"
+            ]
+        ]
+    },
+    {
+        "id": "966f3d6088728841",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 3",
+        "func": "let user = msg.payload;\nlet logEntry = {\n  id: user.id,\n  name: user.name,\n  timestamp: Date.now()\n};\n\nmsg.payload = logEntry;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 820,
+        "wires": [
+            [
+                "29edaa8e763ccdf0"
+            ]
+        ]
+    },
+    {
+        "id": "29edaa8e763ccdf0",
+        "type": "firebase modify",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "/fingerprint/log/",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 830,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0d3313616e1f624e",
+        "type": "debug",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "ed6de966778b5e39",
+        "type": "debug",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "0d7221151110de61",
+        "type": "mqtt-broker",
+        "name": "MQTT SERVER",
+        "broker": "192.168.1.37",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0d18f6dc995db142",
+        "type": "ui_group",
+        "name": "Fingerprint",
+        "tab": "38b4d82e7fbd2cf0",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e124daca6d21176c",
+        "type": "remote-config",
+        "name": "Node-RED UI",
+        "host": "localhost",
+        "protocol": "http",
+        "port": "1880",
+        "baseurl": "/ui",
+        "instancehash": "jvt8uzepph0j08zr1j1iirgwpl4jy674s98dwcb7v5vo214sh92melrgr15a57r3",
+        "server": "nodered05.remote-red.com",
+        "region": "sg"
+    },
+    {
+        "id": "3b7a3b308d9c95a6",
+        "type": "mqtt-broker",
+        "name": "Your MQTT Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "bb093c15ab4d4c80",
+        "type": "ui_group",
+        "name": "Table",
+        "tab": "38b4d82e7fbd2cf0",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "38b4d82e7fbd2cf0",
+        "type": "ui_tab",
+        "name": "IOT Smart Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
