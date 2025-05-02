@@ -1,0 +1,816 @@
+[
+    {
+        "id": "bbf8f55f0c3f9fe4",
+        "type": "tab",
+        "label": "Fingerprint",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "81890e838b0657de",
+        "type": "mqtt out",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/poweronoff",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0d7221151110de61",
+        "x": 600,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e0d0a50c6ee431b0",
+        "type": "firebase auth",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "RTDB Auth",
+        "firebaseconfig": "",
+        "x": 100,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "63f0fa64b687e489",
+        "type": "mqtt in",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/id_get_request",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "0d7221151110de61",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 580,
+        "wires": [
+            [
+                "a8f67c9e4d257ec5"
+            ]
+        ]
+    },
+    {
+        "id": "a8f67c9e4d257ec5",
+        "type": "firebase.once",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "Update ID Count",
+        "firebaseconfig": "",
+        "childpath": "/id",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 370,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "40559ec95755edca",
+        "type": "remote-access",
+        "z": "bbf8f55f0c3f9fe4",
+        "confignode": "e124daca6d21176c",
+        "name": "",
+        "verbose": 0,
+        "x": 280,
+        "y": 20,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6d01ce761ea5c6fa",
+        "type": "ui_button",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "group": "0d18f6dc995db142",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Power On",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "topic": "on",
+        "topicType": "str",
+        "x": 100,
+        "y": 80,
+        "wires": [
+            [
+                "81890e838b0657de",
+                "ba2d2fa0edcc7df6"
+            ]
+        ]
+    },
+    {
+        "id": "26ce68fec0195295",
+        "type": "ui_button",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "group": "0d18f6dc995db142",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Power Off",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "81890e838b0657de",
+                "ba2d2fa0edcc7df6"
+            ]
+        ]
+    },
+    {
+        "id": "d102935d50ecd617",
+        "type": "ui_text",
+        "z": "bbf8f55f0c3f9fe4",
+        "group": "0d18f6dc995db142",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Power Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Arial,Arial,Helvetica,sans-serif",
+        "fontSize": 16,
+        "color": "#ff0000",
+        "x": 340,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "94ada38ed1e91b06",
+        "type": "firebase.on",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "RetrievePowerStatuts",
+        "firebaseconfig": "",
+        "childpath": "fingerprint/Power",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 100,
+        "y": 640,
+        "wires": [
+            [
+                "d102935d50ecd617"
+            ]
+        ]
+    },
+    {
+        "id": "ee15786eed4dcd6a",
+        "type": "ui_table",
+        "z": "bbf8f55f0c3f9fe4",
+        "group": "bb093c15ab4d4c80",
+        "name": "UserTable",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 580,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "edab045bf0f03a48",
+        "type": "firebase.on",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "Retrieve User Info for table",
+        "firebaseconfig": "",
+        "childpath": "/fingerprint/Users",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 110,
+        "y": 540,
+        "wires": [
+            [
+                "1c3a1ed73c35e1fa"
+            ]
+        ]
+    },
+    {
+        "id": "1c3a1ed73c35e1fa",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 1",
+        "func": "let users = msg.payload;\nlet tableData = [];\n\nfor (let key in users) {\n    if (users.hasOwnProperty(key)) {\n        tableData.push({\n            FingerprintId: users[key].id,\n            Name: users[key].name\n        });\n    }\n}\n\nmsg.payload = tableData;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 540,
+        "wires": [
+            [
+                "ee15786eed4dcd6a"
+            ]
+        ]
+    },
+    {
+        "id": "769c36b70f8a0458",
+        "type": "mqtt in",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/match",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "0d7221151110de61",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 700,
+        "wires": [
+            [
+                "acfae1a9a26a6b8d"
+            ]
+        ]
+    },
+    {
+        "id": "acfae1a9a26a6b8d",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 2",
+        "func": "let id = msg.payload.id;\nid = id + 1;\nmsg.childpath = \"/fingerprint/Users/user\" + id;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 700,
+        "wires": [
+            [
+                "4b286d58b16875a8"
+            ]
+        ]
+    },
+    {
+        "id": "4b286d58b16875a8",
+        "type": "firebase.once",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "FindUserByID",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 460,
+        "y": 700,
+        "wires": [
+            [
+                "966f3d6088728841"
+            ]
+        ]
+    },
+    {
+        "id": "966f3d6088728841",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 3",
+        "func": "let user = msg.payload;\nlet logEntry = {\n  id: user.id,\n  name: user.name,\n  timestamp: Date.now()\n};\n\nmsg.payload = logEntry;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 700,
+        "wires": [
+            [
+                "29edaa8e763ccdf0"
+            ]
+        ]
+    },
+    {
+        "id": "29edaa8e763ccdf0",
+        "type": "firebase modify",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "CreateLogRecord",
+        "firebaseconfig": "",
+        "childpath": "/fingerprint/log/",
+        "method": "push",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 830,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "05959761e30757cd",
+        "type": "mqtt out",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/delete",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0d7221151110de61",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fd823bcde5ae3348",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 5",
+        "func": "let users = msg.payload;\nlet obj = {};\n\nfor (let x in users) {\n    let user = users[x];\n    obj[user.id] = user.name;  // Key is ID, value is name\n}\n\nmsg.payload = obj;  // send directly to ui_template\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "707e3a44754b5ce3"
+            ]
+        ]
+    },
+    {
+        "id": "ae1510707f1415a5",
+        "type": "ui_toast",
+        "z": "bbf8f55f0c3f9fe4",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 570,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "0126031ffb6f7ba8",
+        "type": "ui_form",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "label": "",
+        "group": "af2b65ea85e88d79",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Your Name",
+                "value": "name",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "name": ""
+        },
+        "payload": "",
+        "submit": "Enroll",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "f831bce43807c2b7"
+            ]
+        ]
+    },
+    {
+        "id": "3e1b59d6ed9e48c8",
+        "type": "change",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "0126031ffb6f7ba8",
+                "707e3a44754b5ce3"
+            ]
+        ]
+    },
+    {
+        "id": "707e3a44754b5ce3",
+        "type": "ui_template",
+        "z": "bbf8f55f0c3f9fe4",
+        "group": "e6e8c9f86428a3a8",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<md-card style=\"background-color: #2d2d2d; color: white;\">\n\n\n  <md-card-content>\n    <p>Select a user:</p>\n    <select id=\"userDropdown\"\n            ng-model=\"selectedUser\"\n            ng-options=\"key as label for (key, label) in users\"\n            ng-change=\"checkSelection()\"\n            style=\"width: 100%; padding: 5px;\">\n    </select>\n\n    <br><br>\n\n    <button class=\"md-button md-raised\"\n            ng-click=\"sendDelete()\"\n            ng-disabled=\"!selectedUser\"\n            style=\"background-color: #7fbf3f; color: black;\">\n      Delete\n    </button>\n  </md-card-content>\n</md-card>\n\n<script>\n(function(scope) {\n  scope.users = {};\n  scope.selectedUser = \"\";\n\n  scope.checkSelection = function() {\n    // Optional: logic when user selects something\n  };\n\n  scope.sendDelete = function() {\n    scope.send({ payload: scope.selectedUser });\n  };\n\n  scope.$watch('msg', function(msg) {\n    if (msg && msg.payload && typeof msg.payload === 'object' && !Array.isArray(msg.payload)) {\n      scope.users = msg.payload;\n    }\n  });\n})(scope);\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 600,
+        "y": 380,
+        "wires": [
+            [
+                "05959761e30757cd"
+            ]
+        ]
+    },
+    {
+        "id": "c3ee370365739ed6",
+        "type": "inject",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 360,
+        "wires": [
+            [
+                "419cf98ee4d90670"
+            ]
+        ]
+    },
+    {
+        "id": "419cf98ee4d90670",
+        "type": "firebase.once",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "Keep Retrieve User Info for deletion",
+        "firebaseconfig": "",
+        "childpath": "/fingerprint/Users/",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 180,
+        "y": 420,
+        "wires": [
+            [
+                "fd823bcde5ae3348"
+            ]
+        ]
+    },
+    {
+        "id": "1a48fe27d5017dc6",
+        "type": "mqtt out",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/username",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0d7221151110de61",
+        "x": 720,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f831bce43807c2b7",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 4",
+        "func": "let message = msg.payload;\nmessage = message.name;\nmsg.payload = message;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 240,
+        "wires": [
+            [
+                "1a48fe27d5017dc6"
+            ]
+        ]
+    },
+    {
+        "id": "a80b4f18cd618a46",
+        "type": "mqtt in",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/deleteDBID",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "0d7221151110de61",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 800,
+        "wires": [
+            [
+                "e6f80b311785750d"
+            ]
+        ]
+    },
+    {
+        "id": "dba50e3c7d7c145a",
+        "type": "firebase modify",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "Remove ID",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "method": "remove",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 550,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6f80b311785750d",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 6",
+        "func": "let id = msg.payload;\nid = id + 1;\nmsg.childpath = \"/fingerprint/Users/user\" + id;\nmsg.payload = \"Deleted User\" + id;\nmsg.topic = \"Notification\";\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 800,
+        "wires": [
+            [
+                "dba50e3c7d7c145a",
+                "ae1510707f1415a5"
+            ]
+        ]
+    },
+    {
+        "id": "285a5f2b0c8f2257",
+        "type": "firebase.on",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "On Change Retrieve User Info for Deletion",
+        "firebaseconfig": "",
+        "childpath": "/fingerprint/Users",
+        "atStart": true,
+        "eventType": "value",
+        "queries": [],
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "fd823bcde5ae3348"
+            ]
+        ]
+    },
+    {
+        "id": "ba2d2fa0edcc7df6",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 7",
+        "func": "if(msg.topic == \"on\"){\n    msg.payload = true;\n}else{\n    msg.payload = false;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "3e1b59d6ed9e48c8"
+            ]
+        ]
+    },
+    {
+        "id": "552310624c0b8d2a",
+        "type": "ui_template",
+        "z": "bbf8f55f0c3f9fe4",
+        "group": "0d18f6dc995db142",
+        "name": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n(function(scope) {\n  let refreshed = false;\n\n  scope.$watch('msg.payload', function(payload) {\n    if (!refreshed && payload == 1) {\n      refreshed = true;\n      setTimeout(function() {\n        location.reload();\n      }, 500);\n    }\n  });\n})(scope);\n</script>\n",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 460,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65e67983d9529723",
+        "type": "mqtt in",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "",
+        "topic": "fingerprint/add",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "0d7221151110de61",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 70,
+        "y": 480,
+        "wires": [
+            [
+                "2bbca17d6ae01376"
+            ]
+        ]
+    },
+    {
+        "id": "2bbca17d6ae01376",
+        "type": "function",
+        "z": "bbf8f55f0c3f9fe4",
+        "name": "function 8",
+        "func": "if (msg.payload == 1) {\n    setTimeout(() => {\n        node.send({ payload: \"\" });\n    }, 1000);\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 480,
+        "wires": [
+            [
+                "552310624c0b8d2a"
+            ]
+        ]
+    },
+    {
+        "id": "0d7221151110de61",
+        "type": "mqtt-broker",
+        "name": "MQTT SERVER",
+        "broker": "192.168.1.30",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e124daca6d21176c",
+        "type": "remote-config",
+        "name": "Node-RED UI",
+        "host": "localhost",
+        "protocol": "http",
+        "port": "1880",
+        "baseurl": "/ui",
+        "instancehash": "jvt8uzepph0j08zr1j1iirgwpl4jy674s98dwcb7v5vo214sh92melrgr15a57r3",
+        "server": "nodered05.remote-red.com",
+        "region": "sg"
+    },
+    {
+        "id": "0d18f6dc995db142",
+        "type": "ui_group",
+        "name": "Fingerprint",
+        "tab": "38b4d82e7fbd2cf0",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bb093c15ab4d4c80",
+        "type": "ui_group",
+        "name": "User Fingerprint Table",
+        "tab": "38b4d82e7fbd2cf0",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "af2b65ea85e88d79",
+        "type": "ui_group",
+        "name": "Enroll New Fingerprint",
+        "tab": "38b4d82e7fbd2cf0",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e6e8c9f86428a3a8",
+        "type": "ui_group",
+        "name": "Delete Fingerprint",
+        "tab": "38b4d82e7fbd2cf0",
+        "order": 3,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "38b4d82e7fbd2cf0",
+        "type": "ui_tab",
+        "name": "IOT Smart Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
