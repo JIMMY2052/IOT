@@ -1,0 +1,28 @@
+[
+    {
+        "id": "40559ec95755edca",
+        "type": "remote-access",
+        "z": "bbf8f55f0c3f9fe4",
+        "confignode": "e124daca6d21176c",
+        "name": "",
+        "verbose": 0,
+        "x": 280,
+        "y": 20,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e124daca6d21176c",
+        "type": "remote-config",
+        "name": "Node-RED UI",
+        "host": "localhost",
+        "protocol": "http",
+        "port": "1880",
+        "baseurl": "/ui",
+        "instancehash": "jvt8uzepph0j08zr1j1iirgwpl4jy674s98dwcb7v5vo214sh92melrgr15a57r3",
+        "server": "nodered05.remote-red.com",
+        "region": "sg"
+    }
+]
